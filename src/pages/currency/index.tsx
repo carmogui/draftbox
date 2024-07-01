@@ -1,5 +1,5 @@
 import { CommonScreen } from "../../components";
-import { CleanString, ConvertCurrency } from "./components";
+import { CleanString, ConvertCurrency, CustomCaretInput } from "./components";
 
 export function Currency() {
   return (
@@ -8,6 +8,8 @@ export function Currency() {
         this is useful when you need some value from the user, but the decimals
         doesn't matter
       </p>
+
+      <CustomCaretInput />
 
       <ConvertCurrency />
 
