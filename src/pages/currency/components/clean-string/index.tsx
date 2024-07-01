@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Input } from "../../../../components";
 import { FaAnglesRight } from "react-icons/fa6";
-import { formatCurrency } from "../../helpes";
+import { formatCurrency } from "../../helpers";
 
 function cleanString(val: string) {
   const formattedValue = val.replace(/[^0-9]/g, "");

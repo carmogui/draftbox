@@ -1,60 +1,58 @@
 import { useState } from "react";
 import { Input } from "../../../../components";
+import { formatEndEdge } from "../../helpers";
 
 export function CustomCaretInput() {
   const [inputValue, setValue] = useState("$ 100,00");
 
   return (
     <div className="flex flex-col gap-3">
-      <span>convert to currency with fixed decimals</span>
+      <span>forces input caret to not move to the edges</span>
 
       <div className="flex gap-2 items-center">
         <Input
           value={inputValue}
           onChange={(e) => {
-            console.log(e.target.value);
-            const { value, selectionStart, selectionEnd } = e.target;
+            e.preventDefault();
 
-            console.log("selection");
-            console.log(selectionStart);
-            console.log(selectionEnd);
+            const { value, selectionStart, selectionEnd } = e.target;
 
             const allowedStart = 3;
             const allowedEnd = value.length - 3;
 
-            if (
-              inputValue.length < value.length &&
-              selectionEnd &&
-              selectionEnd > allowedEnd
-            ) {
-              const newValue =
-                value.slice(0, selectionEnd - 1) + value.slice(selectionEnd);
+            if (inputValue.length < value.length) {
+              if (selectionEnd && selectionEnd > allowedEnd) {
+                const formattedValue = formatEndEdge({
+                  newStr: value,
+                  allowedEnd,
+                  currentEnd: selectionEnd,
+                });
 
-              console.log("value: ", value);
-              console.log("inputValue: ", inputValue);
-              console.log("newValue: ", newValue);
-              const typedValue = value.charAt(selectionEnd - 1);
+                setTimeout(() => {
+                  e.target.setSelectionRange(allowedEnd, allowedEnd);
+                });
 
-              const formattedStr =
-                newValue.slice(0, allowedEnd - 1) +
-                typedValue +
-                newValue.slice(allowedEnd - 1);
+                return setValue(formattedValue);
+              }
 
-              console.log("typedValue: ", typedValue);
+              if (
+                selectionStart === 0 ||
+                (selectionStart && selectionStart < allowedStart)
+              ) {
+                const formattedValue = formatEndEdge({
+                  newStr: value,
+                  allowedEnd: allowedStart,
+                  currentEnd: selectionStart,
+                });
 
-              console.log("formattedStr: ", formattedStr);
+                setTimeout(() => {
+                  e.target.setSelectionRange(allowedStart, allowedStart);
 
-              setTimeout(() => {
-                e.target.setSelectionRange(allowedEnd, allowedEnd);
-              }, 100);
+                  e.target.scrollTo(0, 0);
+                });
 
-              return setValue(formattedStr);
-            }
-
-            if (selectionStart && selectionStart < allowedStart) {
-              e.target.setSelectionRange(allowedStart, allowedStart);
-            } else if (selectionEnd && selectionEnd > allowedEnd) {
-              e.target.setSelectionRange(allowedEnd, allowedEnd);
+                return setValue(formattedValue);
+              }
             }
 
             setValue(value);

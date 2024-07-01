@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Input } from "../../../../components";
-import { convertCurrency, formatCurrency } from "../../helpes";
+import { convertCurrency, formatCurrency } from "../../helpers";
 import { FaAnglesRight } from "react-icons/fa6";
 
 export function ConvertCurrency() {
