@@ -20,6 +20,8 @@ export function Currency() {
 
       <CustomCaretInput />
 
+      <span>apply all the other components in the same input:</span>
+
       <FinalCurrencyInput />
     </CommonScreen>
   );
