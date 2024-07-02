@@ -1,5 +1,10 @@
 import { CommonScreen } from "../../components";
-import { CleanString, ConvertCurrency, CustomCaretInput } from "./components";
+import {
+  CleanString,
+  ConvertCurrency,
+  CustomCaretInput,
+  FinalCurrencyInput,
+} from "./components";
 
 export function Currency() {
   return (
@@ -9,11 +14,13 @@ export function Currency() {
         doesn't matter
       </p>
 
-      <CustomCaretInput />
-
       <ConvertCurrency />
 
       <CleanString />
+
+      <CustomCaretInput />
+
+      <FinalCurrencyInput />
     </CommonScreen>
   );
 }

@@ -15,7 +15,7 @@ export function formatCurrency(val: string) {
 
 export function convertCurrency(val: string) {
   if (val === "") {
-    return "$ 0.00";
+    return "";
   }
 
   return `$ ${val}.00`;
