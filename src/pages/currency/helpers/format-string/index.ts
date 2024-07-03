@@ -5,9 +5,9 @@ interface Props {
 }
 
 export function formatEndEdge({ newStr, currentEnd, allowedEnd }: Props) {
-  const newValue = newStr.slice(0, currentEnd - 1) + newStr.slice(currentEnd);
+  const newValue = newStr.slice(0, currentEnd) + newStr.slice(currentEnd);
 
-  const typedValue = newStr.charAt(currentEnd - 1);
+  const typedValue = newStr.charAt(currentEnd ? currentEnd - 1 : 0);
 
   const formattedStr =
     newValue.slice(0, allowedEnd - 1) +
