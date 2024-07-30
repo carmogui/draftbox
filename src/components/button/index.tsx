@@ -1,0 +1,27 @@
+import { ButtonHTMLAttributes } from "react";
+
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "transparent" | "primary";
+}
+
+export function Button({ children, variant = "primary", ...rest }: Props) {
+  if (variant === "transparent") {
+    return (
+      <button
+        className="p-2 hover:bg-slate-600 bg-opacity-20 rounded-lg min-w-14"
+        {...rest}
+      >
+        {children}
+      </button>
+    );
+  }
+
+  return (
+    <button
+      className="p-2 bg-indigo-800 hover:bg-indigo-600 rounded-lg min-w-14"
+      {...rest}
+    >
+      {children}
+    </button>
+  );
+}

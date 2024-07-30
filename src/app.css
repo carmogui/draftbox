@@ -6,3 +6,7 @@
     rgba(0, 0, 0, 0) 1px
   );
 }
+
+.reactour__popover {
+  color: black !important;
+}

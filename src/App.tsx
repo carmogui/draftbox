@@ -23,6 +23,21 @@ function App() {
           learn more
         </Link>
       </div>
+
+      <div className="flex flex-col items-center justify-between w-full h-56 bg-slate-700 shadow-md rounded-lg p-5">
+        <span className="text-4xl font-bold">
+          onboarding for page tutorials
+        </span>
+
+        <span>work in progress</span>
+
+        <Link
+          className="py-3 px-5 bg-slate-900 shadow-md rounded-lg"
+          to={Routes.CoachMark}
+        >
+          learn more
+        </Link>
+      </div>
     </CommonScreen>
   );
 }

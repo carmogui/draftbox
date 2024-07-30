@@ -1,24 +1,27 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Currency } from "./pages/index.ts";
+import { Routes } from "./constants/index.ts";
+import { CoachMark } from "./pages/coach-mark/index.tsx";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: Routes.Home,
     element: <App />,
   },
   {
-    path: "currency",
+    path: Routes.Currency,
     element: <Currency />,
+  },
+  {
+    path: Routes.CoachMark,
+    element: <CoachMark />,
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+createRoot(document.getElementById("root")!).render(
+  <RouterProvider router={router} />
 );
