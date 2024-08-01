@@ -75,7 +75,7 @@ export function ReactCoachMark() {
           <div className="flex gap-5">
             <Button
               onClick={() => {
-                navigate(`${Routes.OnboardingSubpage}?onboarding=true`);
+                navigate(`/${Routes.OnboardingSubpage}?onboarding=true`);
               }}
             >
               with onboarding
@@ -83,7 +83,7 @@ export function ReactCoachMark() {
 
             <Button
               onClick={() => {
-                navigate(Routes.OnboardingSubpage);
+                navigate(`/${Routes.OnboardingSubpage}`);
               }}
             >
               redirect only
