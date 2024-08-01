@@ -3,9 +3,8 @@ import App from "./App.tsx";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Currency } from "./pages/index.ts";
+import { Currency, Onboarding, OnboardingSubpage } from "./pages/index.ts";
 import { Routes } from "./constants/index.ts";
-import { CoachMark } from "./pages/coach-mark/index.tsx";
 
 const router = createBrowserRouter([
   {
@@ -17,8 +16,12 @@ const router = createBrowserRouter([
     element: <Currency />,
   },
   {
-    path: Routes.CoachMark,
-    element: <CoachMark />,
+    path: Routes.Onboarding,
+    element: <Onboarding />,
+  },
+  {
+    path: Routes.OnboardingSubpage,
+    element: <OnboardingSubpage />,
   },
 ]);
 

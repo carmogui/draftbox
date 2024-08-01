@@ -1,10 +1,7 @@
 import { TooltipRenderProps } from "react-joyride";
 import { Button } from "../../../../components";
-import { Dispatch, SetStateAction } from "react";
 
-interface Props extends TooltipRenderProps {
-  setTourStep: Dispatch<SetStateAction<number>>;
-}
+interface Props extends TooltipRenderProps {}
 
 export const Tooltip = ({
   continuous,
@@ -15,11 +12,7 @@ export const Tooltip = ({
   primaryProps,
   tooltipProps,
   isLastStep,
-  setTourStep,
 }: Props) => {
-  backProps.onClick = () => setTourStep((cur) => cur - 1);
-  primaryProps.onClick = () => setTourStep((cur) => cur + 1);
-
   return (
     <div
       className="flex flex-col w-80 h-60 bg-slate-700 rounded-lg p-3 pt-7 relative"
@@ -46,7 +39,7 @@ export const Tooltip = ({
 
           {continuous && isLastStep ? (
             <Button {...closeProps}>
-              <span id="next">finish</span>
+              <span id="close">finish</span>
             </Button>
           ) : (
             <Button {...primaryProps}>

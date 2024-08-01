@@ -1,5 +1,6 @@
 export enum Routes {
   Home = "/",
-  Currency = "currency",
-  CoachMark = "coach-mark",
+  Currency = "/currency",
+  Onboarding = "/onboarding",
+  OnboardingSubpage = "/onboarding-subpage",
 }

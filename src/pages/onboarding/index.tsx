@@ -1,7 +1,7 @@
 import { CommonScreen } from "../../components";
 import { ReactCoachMark } from "./components";
 
-export function CoachMark() {
+export function Onboarding() {
   return (
     <CommonScreen title="site onboarding">
       <p>

@@ -33,7 +33,7 @@ function App() {
 
         <Link
           className="py-3 px-5 bg-slate-900 shadow-md rounded-lg"
-          to={Routes.CoachMark}
+          to={Routes.Onboarding}
         >
           learn more
         </Link>
