@@ -18,7 +18,7 @@ export function Button({ children, variant = "primary", ...rest }: Props) {
 
   return (
     <button
-      className="p-2 bg-indigo-800 hover:bg-indigo-600 rounded-lg min-w-14"
+      className="p-2 bg-indigo-600 shadow-sm hover:bg-indigo-400 rounded-lg min-w-14"
       {...rest}
     >
       {children}

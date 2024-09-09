@@ -1,42 +1,79 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./app.css";
-import { CommonScreen } from "./components";
+import { Button, CommonScreen } from "./components";
 import { Routes } from "./constants";
 import { FinalCurrencyInput } from "./pages/currency/components";
+import { ReactNode } from "react";
 
-function App() {
+function Card({
+  children,
+  title,
+  route,
+}: {
+  children: ReactNode;
+  title: string;
+  route: Routes;
+}) {
   return (
-    <CommonScreen>
-      <h1 className="font-bold text-6xl font-mono tracking-widest">DRAFTBOX</h1>
+    <div className="glass flex flex-col items-center justify-between w-96 min-h-56 shadow-md rounded-lg p-5 gap-4">
+      <h2 className="w-full text-4xl font-bold">{title}</h2>
 
-      <div className="flex flex-col items-center justify-between w-full h-56 bg-slate-700 shadow-md rounded-lg p-5">
-        <span className="text-4xl font-bold">
-          fixed decimals currency input
-        </span>
+      <div className="flex flex-col gap-4 bg-slate-700 p-3 rounded-md w-full h-72">
+        {children}
+      </div>
 
-        <FinalCurrencyInput />
-
+      <div className="flex self-end">
         <Link
-          className="py-3 px-5 bg-slate-900 shadow-md rounded-lg"
-          to={Routes.Currency}
+          className="py-3 px-5 bg-slate-900 hover:bg-slate-800 rounded-lg shadow-md hover:outline hover:outline-1 hover:outline-purple-600"
+          to={route}
         >
           learn more
         </Link>
       </div>
+    </div>
+  );
+}
 
-      <div className="flex flex-col items-center justify-between w-full h-56 bg-slate-700 shadow-md rounded-lg p-5">
-        <span className="text-4xl font-bold">
-          onboarding for page tutorials
-        </span>
+function App() {
+  const navigate = useNavigate();
 
-        <span>work in progress</span>
+  return (
+    <CommonScreen>
+      <h1 className="font-bold text-6xl font-mono tracking-widest">DRAFTBOX</h1>
 
-        <Link
-          className="py-3 px-5 bg-slate-900 shadow-md rounded-lg"
-          to={Routes.Onboarding}
-        >
-          learn more
-        </Link>
+      <div className="flex gap-4">
+        <Card title={"fixed decimals currency input"} route={Routes.Currency}>
+          <label className="flex flex-col items-start gap-1">
+            <span>type some number</span>
+            <FinalCurrencyInput />
+          </label>
+        </Card>
+
+        <Card title={"onboarding for page tutorials"} route={Routes.Onboarding}>
+          <>
+            <span>
+              a sequence of modals that point to a specific location in the
+              screen that can be used to teach the user how the system works
+            </span>
+
+            <div className="flex items-center gap-1">
+              <Button
+                onClick={() => {
+                  navigate(`${Routes.OnboardingSubpage}?onboarding=true`);
+                }}
+              >
+                click here
+              </Button>
+              <span>to see an example</span>
+            </div>
+          </>
+        </Card>
+
+        <Card title={"scroll into view"} route={Routes.Onboarding}>
+          <>
+            <span>some tests using react utils to scroll</span>
+          </>
+        </Card>
       </div>
     </CommonScreen>
   );
