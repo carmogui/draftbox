@@ -3,4 +3,5 @@ export enum Routes {
   Currency = "/currency",
   Onboarding = "/onboarding",
   OnboardingSubpage = "/onboarding-subpage",
+  ViewScroll = "/view-scroll",
 }

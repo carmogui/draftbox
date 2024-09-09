@@ -16,7 +16,9 @@ function Card({
 }) {
   return (
     <div className="glass flex flex-col flex-1 items-center justify-between min-w-72 min-h-56 shadow-md rounded-lg p-5 gap-4">
-      <h2 className="w-full text-4xl font-bold">{title}</h2>
+      <h2 className="w-full text-4xl font-bold h-[86px] overflow-hidden overflow-ellipsis line-clamp-2">
+        {title}
+      </h2>
 
       <div className="flex flex-col gap-4 bg-slate-700 p-3 rounded-md w-full h-72">
         {children}
@@ -71,12 +73,13 @@ function App() {
               >
                 click here
               </Button>
+
               <span>to see an example</span>
             </div>
           </div>
         </Card>
 
-        <Card title={"scroll into view"} route={Routes.Onboarding}>
+        <Card title={"scroll into view"} route={Routes.ViewScroll}>
           <>
             <span>some tests using react utils to scroll</span>
           </>

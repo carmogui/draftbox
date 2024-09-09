@@ -3,8 +3,8 @@ import App from "./App.tsx";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Currency, Onboarding, OnboardingSubpage } from "./pages/index.ts";
-import { Routes } from "./constants/index.ts";
+import { Currency, Onboarding, OnboardingSubpage, ViewScroll } from "./pages";
+import { Routes } from "./constants";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: Routes.OnboardingSubpage,
     element: <OnboardingSubpage />,
+  },
+  {
+    path: Routes.ViewScroll,
+    element: <ViewScroll />,
   },
 ]);
 
