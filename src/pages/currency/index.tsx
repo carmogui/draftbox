@@ -20,9 +20,13 @@ export function Currency() {
 
       <CustomCaretInput />
 
-      <span>apply all the other components in the same input:</span>
+      <div className="flex flex-col gap-2">
+        <span>apply all the other components in the same input:</span>
 
-      <FinalCurrencyInput />
+        <div>
+          <FinalCurrencyInput />
+        </div>
+      </div>
     </CommonScreen>
   );
 }

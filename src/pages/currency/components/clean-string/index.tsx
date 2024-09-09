@@ -20,6 +20,7 @@ export function CleanString() {
 
       <div className="flex gap-2 items-center">
         <Input
+          placeholder="type some number"
           type="tel"
           value={value}
           onChange={(e) => {

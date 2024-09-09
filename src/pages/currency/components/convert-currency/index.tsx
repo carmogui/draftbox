@@ -19,6 +19,7 @@ export function ConvertCurrency() {
 
       <div className="flex gap-2 items-center">
         <Input
+          placeholder="type some number"
           value={value}
           onChange={(e) => {
             setValue(e.target.value);
@@ -28,7 +29,7 @@ export function ConvertCurrency() {
         <FaAnglesRight />
 
         <span className="bg-slate-500 rounded-lg p-1 text-right">
-          {formattedValue}
+          {formattedValue || 0}
         </span>
       </div>
     </div>

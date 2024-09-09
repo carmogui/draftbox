@@ -11,6 +11,7 @@ export function CustomCaretInput() {
 
       <div className="flex gap-2 items-center">
         <Input
+          placeholder="type some number"
           value={inputValue}
           onChange={(e) => {
             e.preventDefault();

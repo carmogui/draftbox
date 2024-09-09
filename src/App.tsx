@@ -15,7 +15,7 @@ function Card({
   route: Routes;
 }) {
   return (
-    <div className="glass flex flex-col items-center justify-between w-96 min-h-56 shadow-md rounded-lg p-5 gap-4">
+    <div className="glass flex flex-col flex-1 items-center justify-between min-w-72 min-h-56 shadow-md rounded-lg p-5 gap-4">
       <h2 className="w-full text-4xl font-bold">{title}</h2>
 
       <div className="flex flex-col gap-4 bg-slate-700 p-3 rounded-md w-full h-72">
@@ -41,16 +41,23 @@ function App() {
     <CommonScreen>
       <h1 className="font-bold text-6xl font-mono tracking-widest">DRAFTBOX</h1>
 
-      <div className="flex gap-4">
+      <div className="flex gap-4 flex-wrap">
         <Card title={"fixed decimals currency input"} route={Routes.Currency}>
-          <label className="flex flex-col items-start gap-1">
-            <span>type some number</span>
-            <FinalCurrencyInput />
-          </label>
+          <div className="flex flex-col gap-7">
+            <span>
+              useful when you need some value from the user, but the decimals
+              doesn't matter
+            </span>
+
+            <label className="flex flex-col items-start gap-1">
+              <span>example: </span>
+              <FinalCurrencyInput />
+            </label>
+          </div>
         </Card>
 
         <Card title={"onboarding for page tutorials"} route={Routes.Onboarding}>
-          <>
+          <div className="flex flex-col gap-7">
             <span>
               a sequence of modals that point to a specific location in the
               screen that can be used to teach the user how the system works
@@ -66,7 +73,7 @@ function App() {
               </Button>
               <span>to see an example</span>
             </div>
-          </>
+          </div>
         </Card>
 
         <Card title={"scroll into view"} route={Routes.Onboarding}>

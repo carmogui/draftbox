@@ -26,6 +26,7 @@ export function FinalCurrencyInput() {
 
   return (
     <Input
+      placeholder="type some number"
       forwardRef={ref}
       value={value}
       onChange={(e) => {

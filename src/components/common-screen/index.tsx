@@ -16,7 +16,7 @@ export function CommonScreen({ children, title, goBack }: Props) {
 
   return (
     <div className=" flex min-h-[100dvh]">
-      <div className="custom-background flex items-center flex-col w-full max-w-screen-xl min-h-full mx-auto p-16 gap-12">
+      <div className="custom-background flex flex-col w-full max-w-screen-xl min-h-full mx-auto p-16 gap-12">
         {title ? (
           <div className="flex flex-col w-full">
             <button
