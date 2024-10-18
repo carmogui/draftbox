@@ -1,6 +1,12 @@
 "use-client";
 
-import { ButtonHTMLAttributes, ReactNode, useEffect, useState } from "react";
+import {
+  ButtonHTMLAttributes,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import "./app.css";
 import { Card as CardType, defaultCards, Suits } from "./cards";
 import { Button } from "./components";
@@ -84,6 +90,8 @@ function Status({ children, suit }: { children: ReactNode; suit: Suits }) {
   );
 }
 
+const MINIMUM_CARDS = 6;
+
 function App() {
   const [battleTurn, setBattleTurn] = useState(BattleTurn.Player);
   const [turnBuy, setTurnBuy] = useState(true);
@@ -111,6 +119,8 @@ function App() {
   });
 
   const [trash, setTrash] = useState<CardType | null>(null);
+
+  const firstRender = useRef(true);
 
   useEffect(() => {
     function resetDecks() {
@@ -172,6 +182,55 @@ function App() {
 
     setTripletsValues(newTripletsValues);
   }, [triplets.length]);
+
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+
+    const newDeck = [...deck];
+    const playerDeck: CardType[] = cards;
+    const enemyDeck: CardType[] = enemyCards;
+
+    if (battleTurn === BattleTurn.Player) {
+      if (cards.length < MINIMUM_CARDS) {
+        for (let i = 0; i < 3; i++) {
+          const randomNum = getRandomIntInclusive(0, newDeck.length - 1);
+
+          const card = newDeck[randomNum];
+          const index = newDeck.indexOf(card);
+          if (index !== -1) {
+            const cardToAdd = newDeck.splice(index, 1);
+
+            playerDeck.push(cardToAdd[0]);
+          }
+        }
+
+        setCards(playerDeck);
+      }
+    }
+
+    if (battleTurn === BattleTurn.Enemy) {
+      if (enemyCards.length < MINIMUM_CARDS) {
+        for (let i = 0; i < 3; i++) {
+          const randomNum = getRandomIntInclusive(0, newDeck.length - 1);
+
+          const card = newDeck[randomNum];
+          const index = newDeck.indexOf(card);
+          if (index !== -1) {
+            const cardToAdd = newDeck.splice(index, 1);
+
+            enemyDeck.push(cardToAdd[0]);
+          }
+        }
+
+        setEnemyCards(enemyDeck);
+      }
+    }
+
+    setDeck(newDeck);
+  }, [battleTurn]);
 
   function utilizeCard(
     card: CardType,
@@ -405,7 +464,7 @@ function App() {
                 }
               }
 
-              if (isValidSameNumber || (isValidSuit && isValidSequence)) {
+              if (isValidSameNumber || isValidSuit || isValidSequence) {
                 setTriplets([]);
 
                 if (battleTurn === BattleTurn.Player) {
@@ -452,27 +511,6 @@ function App() {
                 }
                 setTrash(card);
                 setTriplets([]);
-              } else {
-                triplets.forEach((tripletCard) => {
-                  setTriplets((cur) => {
-                    const index = cur.indexOf(tripletCard);
-                    if (index !== -1) {
-                      cur.splice(index, 1);
-                    }
-
-                    return cur;
-                  });
-
-                  if (battleTurn === BattleTurn.Player) {
-                    setCards((cur) => {
-                      return [...cur, tripletCard];
-                    });
-                  } else {
-                    setEnemyCards((cur) => {
-                      return [...cur, tripletCard];
-                    });
-                  }
-                });
 
                 if (battleTurn === BattleTurn.Player) {
                   setEnemy((cur) => {
@@ -495,6 +533,27 @@ function App() {
                     };
                   });
                 }
+              } else {
+                triplets.forEach((tripletCard) => {
+                  setTriplets((cur) => {
+                    const index = cur.indexOf(tripletCard);
+                    if (index !== -1) {
+                      cur.splice(index, 1);
+                    }
+
+                    return cur;
+                  });
+
+                  if (battleTurn === BattleTurn.Player) {
+                    setCards((cur) => {
+                      return [...cur, tripletCard];
+                    });
+                  } else {
+                    setEnemyCards((cur) => {
+                      return [...cur, tripletCard];
+                    });
+                  }
+                });
               }
 
               setTurnBuy(true);
