@@ -93,8 +93,11 @@ function Status({ children, suit }: { children: ReactNode; suit: Suits }) {
 const MINIMUM_CARDS = 6;
 
 function App() {
-  const [battleTurn, setBattleTurn] = useState(BattleTurn.Player);
   const [turnBuy, setTurnBuy] = useState(true);
+  const [battleTurn, setBattleTurn] = useState(BattleTurn.Player);
+
+  const [madeTriplet, setMadeTriplet] = useState(false);
+
   const [deck, setDeck] = useState<CardType[]>(defaultCards);
 
   const [cards, setCards] = useState<CardType[]>([]);
@@ -252,51 +255,44 @@ function App() {
   }
 
   function renderCards(cardsToRender: CardType[]) {
-    return (
-      cardsToRender
-        // .sort((a, b) => a.id - b.id)
-        .map((card) => {
-          const { id, number, suit } = card;
+    return cardsToRender.map((card) => {
+      const { id, number, suit } = card;
 
-          return (
-            <Card
-              key={id}
-              onClick={() => {
-                battleTurn === BattleTurn.Player
-                  ? utilizeCard(card, setCards)
-                  : utilizeCard(card, setEnemyCards);
-              }}
-              suit={suit}
-            >
-              {number}
-            </Card>
-          );
-        })
-    );
+      return (
+        <Card
+          key={id}
+          onClick={() => {
+            battleTurn === BattleTurn.Player
+              ? utilizeCard(card, setCards)
+              : utilizeCard(card, setEnemyCards);
+          }}
+          suit={suit}
+        >
+          {number}
+        </Card>
+      );
+    });
   }
 
   return (
     <div className="flex flex-col gap-2 p-5 max-w-[800px] m-auto">
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex items-center justify-center gap-2">
         <div className="flex items-center gap-2">
-          <Status suit={Suits.Heart}>{player.h}</Status>
-          <Status suit={Suits.Diamonds}>{player.d}</Status>
-          <Status suit={Suits.Spades}>{player.s}</Status>
           <h2 className="flex items-center justify-center px-2 py-1 w-20 bg-blue-600 rounded-md">
             player 1
           </h2>
+
+          <Status suit={Suits.Heart}>{player.h}</Status>
         </div>
 
         <span>vs</span>
 
         <div className="flex items-center gap-2">
+          <Status suit={Suits.Heart}>{enemy.h}</Status>
+
           <h2 className="flex items-center justify-center px-2 py-1 w-20 bg-green-500 rounded-md">
             player 2
           </h2>
-
-          <Status suit={Suits.Heart}>{enemy.h}</Status>
-          <Status suit={Suits.Diamonds}>{enemy.d}</Status>
-          <Status suit={Suits.Spades}>{enemy.s}</Status>
         </div>
       </div>
 
@@ -421,6 +417,8 @@ function App() {
           <Button
             disabled={triplets.length < 3}
             onClick={() => {
+              if (madeTriplet) return alert("voce ja fez uma trinca!");
+
               const { h, d, s } = tripletsValues;
 
               let isValidSuit = false;
@@ -466,21 +464,34 @@ function App() {
 
               if (isValidSameNumber || isValidSuit || isValidSequence) {
                 setTriplets([]);
+                setMadeTriplet(true);
 
                 if (battleTurn === BattleTurn.Player) {
                   setPlayer((cur) => {
                     return {
-                      d: cur.d + d,
+                      ...cur,
                       h: cur.h + h,
-                      s: cur.s + s,
+                    };
+                  });
+
+                  setEnemy((cur) => {
+                    return {
+                      ...cur,
+                      h: cur.h - s,
                     };
                   });
                 } else {
                   setEnemy((cur) => {
                     return {
-                      d: cur.d + d,
+                      ...cur,
                       h: cur.h + h,
-                      s: cur.s + s,
+                    };
+                  });
+
+                  setPlayer((cur) => {
+                    return {
+                      ...cur,
+                      h: cur.h - s,
                     };
                   });
                 }
@@ -511,28 +522,6 @@ function App() {
                 }
                 setTrash(card);
                 setTriplets([]);
-
-                if (battleTurn === BattleTurn.Player) {
-                  setEnemy((cur) => {
-                    const { s } = player;
-                    const damage = s - cur.d > 0 ? s - cur.d : 0;
-
-                    return {
-                      ...cur,
-                      h: cur.h - damage,
-                    };
-                  });
-                } else {
-                  setPlayer((cur) => {
-                    const { s } = enemy;
-                    const damage = s - cur.d > 0 ? s - cur.d : 0;
-
-                    return {
-                      ...cur,
-                      h: cur.h - damage,
-                    };
-                  });
-                }
               } else {
                 triplets.forEach((tripletCard) => {
                   setTriplets((cur) => {
@@ -556,6 +545,7 @@ function App() {
                 });
               }
 
+              setMadeTriplet(false);
               setTurnBuy(true);
 
               if (battleTurn === BattleTurn.Player) {
@@ -574,7 +564,7 @@ function App() {
 
           <div className="flex gap-2">
             <Status suit={Suits.Heart}>{tripletsValues.h}</Status>
-            <Status suit={Suits.Diamonds}>{tripletsValues.d}</Status>
+            {/* <Status suit={Suits.Diamonds}>{tripletsValues.d}</Status> */}
             <Status suit={Suits.Spades}>{tripletsValues.s}</Status>
           </div>
         </div>
