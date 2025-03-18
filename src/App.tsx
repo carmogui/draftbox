@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./app.css";
-import { Button, CommonScreen } from "./components";
+import { Button, CommonScreen, SidebarMenu } from "./components";
 import { Routes } from "./constants";
 import { FinalCurrencyInput } from "./pages/currency/components";
 import { ReactNode } from "react";
@@ -15,12 +15,12 @@ function Card({
   route: Routes;
 }) {
   return (
-    <div className="glass flex flex-col flex-1 items-center justify-between min-w-72 min-h-56 shadow-md rounded-lg p-5 gap-4">
+    <div className="flex flex-col flex-1 items-center justify-between min-w-72 min-h-56 rounded-lg p-5 gap-4">
       <h2 className="w-full text-4xl font-bold h-[86px] overflow-hidden overflow-ellipsis line-clamp-2">
         {title}
       </h2>
 
-      <div className="flex flex-col gap-4 bg-slate-700 p-3 rounded-md w-full h-72">
+      <div className="flex flex-col gap-4 p-3 rounded-md w-full h-72">
         {children}
       </div>
 
@@ -43,7 +43,7 @@ function App() {
     <CommonScreen>
       <h1 className="font-bold text-6xl font-mono tracking-widest">DRAFTBOX</h1>
 
-      <div className="flex gap-4 flex-wrap">
+      <div className="flex flex-col gap-4 flex-wrap">
         <Card title={"fixed decimals currency input"} route={Routes.Currency}>
           <div className="flex flex-col gap-7">
             <span>
@@ -57,6 +57,8 @@ function App() {
             </label>
           </div>
         </Card>
+
+        <hr className="h-px bg-white w-full" />
 
         <Card title={"onboarding for page tutorials"} route={Routes.Onboarding}>
           <div className="flex flex-col gap-7">
@@ -79,9 +81,26 @@ function App() {
           </div>
         </Card>
 
+        <hr className="h-px bg-white w-full" />
+
         <Card title={"scroll into view"} route={Routes.ViewScroll}>
           <>
-            <span>some tests using react utils to scroll</span>
+            <span>
+              some tests using react utils to scroll to bottom, to top, or to
+              the end of a text that has appear
+            </span>
+          </>
+        </Card>
+
+        <hr className="h-px bg-white w-full" />
+
+        <Card title={"sidebar menu"} route={Routes.SidebarMenu}>
+          <>
+            <span>
+              sidebar menu are very useful in some management applications, you
+              can hover this example to see how it works
+            </span>
+            <SidebarMenu />
           </>
         </Card>
       </div>

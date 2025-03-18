@@ -4,4 +4,5 @@ export enum Routes {
   Onboarding = "/onboarding",
   OnboardingSubpage = "/onboarding-subpage",
   ViewScroll = "/view-scroll",
+  SidebarMenu = "/sidebar-menu",
 }
