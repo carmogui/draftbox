@@ -1,0 +1,28 @@
+.anchorButton {
+  anchor-name: --anchor-button;
+}
+
+.popover {
+  position-anchor: --anchor-button;
+  position-try-fallbacks: --bottom;
+
+  position: absolute;
+  margin: 0;
+  inset: auto;
+  top: anchor(top);
+  left: anchor(right);
+
+  color: white;
+
+  flex-direction: column;
+}
+
+.popover:popover-open {
+  display: flex;
+}
+
+@position-try --bottom {
+  inset: auto;
+  bottom: anchor(bottom);
+  left: anchor(right);
+}

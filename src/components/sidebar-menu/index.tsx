@@ -24,10 +24,7 @@ function HoverSubMenu({ showBackground = false }) {
 function NavItem({ showBackground = false }) {
   return (
     <div className={`group relative ${styles.navItem}`}>
-      <a
-        href="/"
-        className="text-neutral-100 w-14 h-14 flex items-center justify-center group-hover:bg-indigo-500"
-      >
+      <a className="text-neutral-100 w-14 h-14 flex items-center justify-center group-hover:bg-indigo-500">
         <MdAutoAwesome size={24} />
       </a>
 

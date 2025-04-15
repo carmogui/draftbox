@@ -1,0 +1,7 @@
+.navItemWrong:not(:hover) + div {
+  @apply hidden;
+}
+
+.navItem:not(:hover) > div:last-child {
+  @apply hidden;
+}

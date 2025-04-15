@@ -86,8 +86,8 @@ function App() {
         <Card title={"scroll into view"} route={Routes.ViewScroll}>
           <>
             <span>
-              some tests using react utils to scroll to bottom, to top, or to
-              the end of a text that has appear
+              some tests to scroll to bottom, to top, or to the end of a text
+              that has appear
             </span>
           </>
         </Card>
