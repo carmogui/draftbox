@@ -39,12 +39,14 @@ function ButtonPopover() {
       <button
         className={`${styles.anchorButton} size-16 hover:bg-black`}
         id="trigger"
+        //@ts-ignore
         popovertarget="menu"
       >
         y
       </button>
 
       <div
+        //@ts-ignore
         popover="auto"
         role="menu"
         id="menu"
