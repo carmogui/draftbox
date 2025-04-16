@@ -48,6 +48,12 @@ function BrowserWindowExample({ children }: HTMLAttributes<HTMLElement>) {
   );
 }
 
+const MENU_ITEMS = [
+  { icon: "x", name: "default submenu", itemQuantity: 2 },
+  { icon: "y", name: "another submenu", itemQuantity: 3 },
+  { icon: "z", name: "large submenu", itemQuantity: 40 },
+];
+
 export function SidebarMenuHoverExpandable() {
   const [expanded, setExpanded] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState<null | number>(null);
@@ -64,46 +70,32 @@ export function SidebarMenuHoverExpandable() {
             <div
               className={`flex flex-col overflow-auto ${styles.noScrollbar}`}
             >
-              <NavItemExpanded
-                name="default submenu"
-                menuId={1}
-                selectedMenu={selectedMenu}
-                setSelectedMenu={setSelectedMenu}
-              >
-                x
-              </NavItemExpanded>
-
-              <NavItemExpanded
-                name="another submenu"
-                menuId={2}
-                itemQuantity={3}
-                selectedMenu={selectedMenu}
-                setSelectedMenu={setSelectedMenu}
-              >
-                y
-              </NavItemExpanded>
-
-              <NavItemExpanded
-                name="large submenu"
-                menuId={3}
-                itemQuantity={40}
-                selectedMenu={selectedMenu}
-                setSelectedMenu={setSelectedMenu}
-              >
-                z
-              </NavItemExpanded>
+              {MENU_ITEMS.map(({ icon, name, itemQuantity }, index) => (
+                <NavItemExpanded
+                  key={name}
+                  name={name}
+                  itemQuantity={itemQuantity}
+                  menuId={index}
+                  selectedMenu={selectedMenu}
+                  setSelectedMenu={setSelectedMenu}
+                >
+                  {icon}
+                </NavItemExpanded>
+              ))}
             </div>
           ) : (
             <div
               className={`flex flex-col overflow-auto ${styles.noScrollbar}`}
             >
-              <NavItemContracted name="default submenu">x</NavItemContracted>
-              <NavItemContracted name="another submenu" itemQuantity={3}>
-                y
-              </NavItemContracted>
-              <NavItemContracted name="large submenu" itemQuantity={40}>
-                z
-              </NavItemContracted>
+              {MENU_ITEMS.map(({ icon, name, itemQuantity }) => (
+                <NavItemContracted
+                  key={name}
+                  name={name}
+                  itemQuantity={itemQuantity}
+                >
+                  {icon}
+                </NavItemContracted>
+              ))}
             </div>
           )}
         </div>
